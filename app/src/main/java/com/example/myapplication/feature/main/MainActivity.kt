@@ -7,6 +7,7 @@ import com.example.myapplication.R
 import com.example.myapplication.extensions.addFragment
 import com.example.myapplication.extensions.popFragment
 import com.example.myapplication.extensions.replaceFragment
+import com.example.myapplication.feature.home.HomeFragment
 
 
 class MainActivity : AppCompatActivity(), MainListener {
@@ -15,10 +16,9 @@ class MainActivity : AppCompatActivity(), MainListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null){}
-            //addFragment(HomeFragment.newInstance())
+        if (savedInstanceState == null)
+            addFragment(HomeFragment.newInstance())
     }
-
 
     override fun openFragment(fragment: Fragment, tag: String) {
         replaceFragment(fragment, tag)

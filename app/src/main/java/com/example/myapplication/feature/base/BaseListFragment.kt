@@ -1,5 +1,7 @@
 package com.example.myapplication.feature.base
 
+import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -24,7 +26,7 @@ abstract class BaseListFragment: BaseFragment() {
     lateinit var message: TextView
 
     protected var items: ArrayList<Any> =  ArrayList()
-    protected lateinit var listGenericAdapter : ListGenericAdapter
+    protected var listGenericAdapter : ListGenericAdapter? = null
     private var endlessRecyclerViewScrollListener: EndlessRecyclerViewScrollListener? = null
 
 
@@ -32,6 +34,14 @@ abstract class BaseListFragment: BaseFragment() {
         ButterKnife.bind(this, view)
 
         setupRecycler()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        listGenericAdapter = ListGenericAdapter(items)
+
+        insertLoader()
     }
 
     abstract fun loadData(page: Int)
@@ -47,9 +57,11 @@ abstract class BaseListFragment: BaseFragment() {
         }
 
         endlessRecyclerViewScrollListener?.state = oldState
+        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         layoutManager = linearLayoutManager
         adapter = listGenericAdapter
+
         addOnScrollListener(endlessRecyclerViewScrollListener)
     }
 
@@ -63,7 +75,7 @@ abstract class BaseListFragment: BaseFragment() {
 
     protected fun insertLoader() {
         items.add(Loader())
-        listGenericAdapter.notifyItemInserted(items.size - 1)
+        listGenericAdapter?.notifyItemInserted(items.size - 1)
     }
 
 
@@ -75,7 +87,7 @@ abstract class BaseListFragment: BaseFragment() {
         if (items[lastIndex] is Loader) {
             items.removeAt(lastIndex)
 
-            listGenericAdapter.notifyItemRemoved(lastIndex)
+            listGenericAdapter?.notifyItemRemoved(lastIndex)
         }
     }
 
@@ -83,7 +95,7 @@ abstract class BaseListFragment: BaseFragment() {
         items.clear()
 
         insertLoader()
-        listGenericAdapter.notifyDataSetChanged()
+        listGenericAdapter?.notifyDataSetChanged()
 
         message.hide()
         recyclerView.show()

@@ -7,5 +7,5 @@ import io.reactivex.Single
  */
 interface DataSource {
 
-    fun fetchCategories(): Single<ArrayList<Category>>
+    fun fetchCategories(): Single<ArrayList<Any>>
 }

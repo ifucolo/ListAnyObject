@@ -9,19 +9,14 @@ import com.example.myapplication.source.infrastructure.model.CategoryPayload
  */
 object CategoryMapper {
 
-    fun map(categoryPayload: CategoryPayload) = ArrayList<Category>().apply {
+    fun map(categoryPayload: CategoryPayload) = categoryPayload.categories.mapTo(ArrayList<Any>()) {
 
-        categoryPayload.categories.let {
-            for (category in categoryPayload.categories) {
-                add(Category().apply {
-                    name = category.name
-                    id = category.id
-                    image = category.image
-                    type = category.type
-                    number_offers = category.number_offers
-                })
-            }
+        Category().apply {
+            name = it.name
+            id = it.id
+            image = it.image
+            type = it.type
+            number_offers = it.number_offers
         }
     }
-
 }

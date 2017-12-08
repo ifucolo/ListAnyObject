@@ -9,6 +9,6 @@ import retrofit2.http.GET
  */
 interface ServerApi {
 
-    @GET("categories")
+    @GET("home")
     fun getCategories(): Single<CategoryPayload>
 }

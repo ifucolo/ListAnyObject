@@ -12,5 +12,5 @@ import dagger.Provides
 class RepositoryModule {
 
     @Provides
-    fun providesSelectSpaceCreateSource(repositoryModule: Repository): DataSource = repositoryModule
+    fun providesCreateSource(repositoryModule: Repository): DataSource = repositoryModule
 }

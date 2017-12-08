@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 repositories {
     maven { url 'https://maven.fabric.io/public' }
     mavenCentral()
@@ -53,6 +56,8 @@ dependencies {
 
     implementation 'com.facebook.stetho:stetho:1.5.0'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
 
     implementation 'com.jakewharton:butterknife:8.5.1'
     kapt 'com.jakewharton:butterknife-compiler:8.5.1'

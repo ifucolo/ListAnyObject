@@ -12,7 +12,7 @@ import javax.inject.Inject
  */
 open class Repository @Inject constructor(val serverApi: ServerApi): DataSource {
 
-    override fun fetchCategories() : Single<ArrayList<Category>> {
+    override fun fetchCategories() : Single<ArrayList<Any>> {
 
         return serverApi
                 .getCategories()
